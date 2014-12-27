@@ -1,7 +1,7 @@
 class Ckeditor::PicturesController < Ckeditor::ApplicationController
 
   def index
-    @pictures = Ckeditor::Picture.where(site_id: @site.id).find_all(ckeditor_pictures_scope)
+    @pictures = Ckeditor::Picture.where(site_id: @site.id)
     @pictures = Ckeditor::Paginatable.new(@pictures).page(params[:page])
 
     respond_with(@pictures, :layout => @pictures.first_page?)

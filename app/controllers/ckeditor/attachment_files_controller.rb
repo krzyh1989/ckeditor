@@ -1,7 +1,7 @@
 class Ckeditor::AttachmentFilesController < Ckeditor::ApplicationController
 
   def index
-    @attachments = Ckeditor::AttachmentFile.where(site_id: @site.id).find_all(ckeditor_attachment_files_scope)
+    @attachments = Ckeditor::AttachmentFile.where(site_id: @site.id)
     @attachments = Ckeditor::Paginatable.new(@attachments).page(params[:page])
 
     respond_with(@attachments, :layout => @attachments.first_page?)
