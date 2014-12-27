@@ -1,7 +1,7 @@
 class Ckeditor::AttachmentFilesController < Ckeditor::ApplicationController
 
   def index
-    @attachments = Ckeditor.attachment_file_adapter.where(site_id: @site.id).find_all(ckeditor_attachment_files_scope)
+    @attachments = Ckeditor::AttachmentFile.where(site_id: @site.id).find_all(ckeditor_attachment_files_scope)
     @attachments = Ckeditor::Paginatable.new(@attachments).page(params[:page])
 
     respond_with(@attachments, :layout => @attachments.first_page?)
@@ -9,7 +9,7 @@ class Ckeditor::AttachmentFilesController < Ckeditor::ApplicationController
 
   def create
     @attachment = Ckeditor.attachment_file_model.new
-    @attachment.update_attributes(site_id: @site.id)
+    @attachments.update_attributes(site_id: @site.id)
     respond_with_asset(@attachment)
   end
 
@@ -21,7 +21,7 @@ class Ckeditor::AttachmentFilesController < Ckeditor::ApplicationController
   protected
 
     def find_asset
-      @attachment = Ckeditor.attachment_file_adapter.where(site_id: @site.id).get!(params[:id])
+      @attachment = Ckeditor::AttachmentFile.where(site_id: @site.id).get!(params[:id])
     end
 
     def authorize_resource
