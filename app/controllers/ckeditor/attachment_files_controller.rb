@@ -9,7 +9,6 @@ class Ckeditor::AttachmentFilesController < Ckeditor::ApplicationController
 
   def create
     @attachment = Ckeditor.attachment_file_model.new
-    @attachments.update_attributes(site_id: @site.id)
     respond_with_asset(@attachment)
   end
 

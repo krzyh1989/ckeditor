@@ -9,7 +9,6 @@ class Ckeditor::PicturesController < Ckeditor::ApplicationController
 
   def create
     @picture = Ckeditor.picture_model.new
-    @picture.update_attributes(site_id: @site.id)
     respond_with_asset(@picture)
   end
 
