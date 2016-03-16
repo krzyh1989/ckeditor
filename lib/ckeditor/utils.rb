@@ -25,9 +25,9 @@ module Ckeditor
 
         if options && !options.keys.empty?
           js_options = ActiveSupport::JSON.encode(options)
-          js << "CKEDITOR.replace('#{dom_id}', #{js_options});"
+          js << "if (CKEDITOR.instances['#{dom_id}'] == undefined) { CKEDITOR.replace('#{dom_id}', #{js_options}); }"
         else
-          js << "CKEDITOR.replace('#{dom_id}');"
+          js << "if (CKEDITOR.instances['#{dom_id}'] == undefined) { CKEDITOR.replace('#{dom_id}'); }"
         end
 
         js << "} else { setTimeout(arguments.callee, 50); } })();"
@@ -92,7 +92,7 @@ module Ckeditor
           files += Dir[path.join('**', extensions)]
         end
 
-        files.inject([]) do |items, name| 
+        files.inject([]) do |items, name|
           file = Pathname.new(name)
           base = file.basename('.*').to_s
 
@@ -102,10 +102,6 @@ module Ckeditor
 
           items
         end
-      end
-
-      def extract_content_type(file)
-        
       end
     end
   end

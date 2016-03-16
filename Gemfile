@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gemspec
 
-gem "rails", "3.2.21"
+gem "rails", "4.2.4"
 
 platforms :mri_18 do
   group :test do
@@ -19,20 +19,22 @@ platforms :ruby do
   end
 
   group :development, :test do
+    gem 'jquery-rails', '~> 4.0.4'
     gem "capybara", ">= 0.4.0"
     gem "mynyml-redgreen", "~> 0.7.1", :require => 'redgreen'
   end
 
   group :active_record do
-    # gem "paperclip", "~> 3.0.3"
-    gem 'paperclip', '~> 4.1.1'
+    gem 'paperclip'
     gem "carrierwave"
     gem "dragonfly"
     gem "mini_magick"
+    gem "refile", require: "refile/rails"
+    gem "refile-mini_magick"
   end
 
   group :mongoid do
-    gem "mongoid"
+    gem 'mongoid', '~> 5.0.0'
     gem "bson_ext"
     gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
     gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
